@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MacroNutri – Smart Meal Scanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Welcome Screen -->
+    <section id="welcome-screen" class="screen active">
+      <div class="bg-animated"></div>
+      <div class="screen-inner">
+        <header class="brand">
+          <div class="brand-mark">MN</div>
+          <div class="brand-text">
+            <h1>MacroNutri</h1>
+            <p>Snap. Analyze. Understand your meals in seconds.</p>
+          </div>
+        </header>
+
+        <div class="hero-copy">
+          <h2>Natural nutrition, powered by AI.</h2>
+          <p>
+            Take a photo of your meal and get instant calories and macro breakdown,
+            ready for your daily goals.
+          </p>
+        </div>
+
+        <button class="btn primary" data-target="home-screen">
+          Get started
+        </button>
+
+        <p class="subtext">
+          No manual logging. No guesswork. Just clear, simple insights.
+        </p>
+      </div>
+    </section>
+
+    <!-- Home / Dashboard -->
+    <section id="home-screen" class="screen">
+      <div class="screen-inner">
+        <header class="top-bar">
+          <div>
+            <h2>Today with MacroNutri</h2>
+            <p class="muted">Track your meals and stay aligned with your goals.</p>
+          </div>
+        </header>
+
+        <div class="card stats-card">
+          <div class="stat">
+            <span class="label">Daily goal</span>
+            <span class="value" id="daily-goal">2,000 kcal</span>
+          </div>
+          <div class="stat">
+            <span class="label">Consumed</span>
+            <span class="value accent" id="consumed-today">0 kcal</span>
+          </div>
+        </div>
+
+        <div class="card action-card">
+          <h3>Ready to scan a meal?</h3>
+          <p class="muted">
+            Tap below to open the camera and let MacroNutri analyze your plate.
+          </p>
+          <button class="btn primary" data-target="scan-screen">
+            Start scan
+          </button>
+        </div>
+
+        <div class="card nav-card">
+          <button class="btn ghost" data-target="paywall-screen">
+            MacroNutri Pro
+          </button>
+          <button class="btn ghost" data-target="support-screen">
+            Support & privacy
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Camera / Scan Screen -->
+    <section id="scan-screen" class="screen">
+      <div class="screen-inner">
+        <header class="top-bar">
+          <button class="back-btn" data-target="home-screen">←</button>
+          <h2>Scan your meal</h2>
+        </header>
+
+        <div class="camera-wrapper">
+          <video id="camera-stream" autoplay playsinline></video>
+          <canvas id="capture-canvas" class="hidden"></canvas>
+          <div class="camera-overlay">
+            <p class="muted">Align your meal in the frame, then tap capture.</p>
+          </div>
+        </div>
+
+        <div class="camera-actions">
+          <button id="start-camera" class="btn secondary">
+            Enable camera
+          </button>
+          <button id="capture-photo" class="btn primary" disabled>
+            Capture & analyze
+          </button>
+        </div>
+
+        <p class="helper-text">
+          Your photo will be sent securely to the MacroNutri AI backend for analysis.
+        </p>
+      </div>
+    </section>
+
+    <!-- Results / Macro Breakdown -->
+    <section id="results-screen" class="screen">
+      <div class="screen-inner">
+        <header class="top-bar">
+          <button class="back-btn" data-target="home-screen">←</button>
+          <h2>Meal breakdown</h2>
+        </header>
+
+        <div id="analysis-state" class="card loading-card">
+          <div class="loader"></div>
+          <p>Analyzing your meal with MacroNutri AI…</p>
+        </div>
+
+        <div id="analysis-result" class="card result-card hidden">
+          <h3 id="meal-name">Meal name</h3>
+          <p class="muted" id="meal-note">Estimated values based on your photo.</p>
+
+          <div class="macro-grid">
+            <div class="macro">
+              <span class="label">Calories</span>
+              <span class="value" id="meal-calories">–</span>
+            </div>
+            <div class="macro">
+              <span class="label">Protein</span>
+              <span class="value" id="meal-protein">–</span>
+            </div>
+            <div class="macro">
+              <span class="label">Carbs</span>
+              <span class="value" id="meal-carbs">–</span>
+            </div>
+            <div class="macro">
+              <span class="label">Fat</span>
+              <span class="value" id="meal-fat">–</span>
+            </div>
+          </div>
+
+          <button class="btn primary" id="save-meal">
+            Save to today
+          </button>
+          <button class="btn ghost" data-target="scan-screen">
+            Scan another meal
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscription / Paywall -->
+    <section id="paywall-screen" class="screen">
+      <div class="screen-inner">
+        <header class="top-bar">
+          <button class="back-btn" data-target="home-screen">←</button>
+          <h2>MacroNutri Pro</h2>
+        </header>
+
+        <div class="card paywall-card">
+          <h3>Unlock the full AI experience</h3>
+          <ul class="feature-list">
+            <li>Unlimited AI meal scans</li>
+            <li>Full macro & micronutrient breakdown</li>
+            <li>Meal history & trends</li>
+            <li>Priority AI support</li>
+          </ul>
+
+          <div class="price-row">
+            <span class="price">$4.99</span>
+            <span class="period">per month</span>
+          </div>
+
+          <button class="btn primary">
+            Continue with Pro (placeholder)
+          </button>
+
+          <p class="muted small">
+            Billing and subscription logic will be handled by your Android/iOS store
+            or backend integration.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Support / Contact / Privacy -->
+    <section id="support-screen" class="screen">
+      <div class="screen-inner">
+        <header class="top-bar">
+          <button class="back-btn" data-target="home-screen">←</button>
+          <h2>Support & privacy</h2>
+        </header>
+
+        <div class="card">
+          <h3>Ask MacroNutri AI</h3>
+          <p class="muted">
+            Have a question about your data, nutrition, or how the app works?
+            Ask the AI assistant.
+          </p>
+          <textarea id="support-input" placeholder="Type your question here…"></textarea>
+          <button class="btn primary" id="support-send">
+            Ask AI (placeholder)
+          </button>
+          <p id="support-response" class="muted small">
+            The AI response will appear here. Connect this to your backend support endpoint.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Contact</h3>
+          <p class="muted">
+            For direct support, reach us at:
+          </p>
+          <p class="contact-line">
+            Email: <span>support@macronutri.app</span> (placeholder)
+          </p>
+          <p class="contact-line">
+            WhatsApp: <span>+00 000 000 0000</span> (placeholder)
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Privacy</h3>
+          <p class="muted small">
+            MacroNutri is designed with privacy in mind. Meal photos are sent securely
+            to your AI backend only for analysis and are not stored on the client.
+            You control what is logged and retained on your servers.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
